@@ -8,6 +8,14 @@ const {S3Client,PutObjectCommand} = require('@aws-sdk/client-s3')
 const mime = require('mime-types')
 const PROJECT_ID = process.env.PROJECT_ID ; // this is the project id which we will get from the environment variable
 
+const Redis = require('ioredis')
+const publisher = new Redis('rediss://default:AVNS_Yx79L4motetKBPqAonM@redis-c1d0a88-vercel-bhavesh.a.aivencloud.com:17284')
+
+
+function publishLog(log) {
+    publisher.publish(`logs:${PROJECT_ID}`, JSON.stringify({ log }))
+}
+
 
 const s3Client = new S3Client({
     region: 'ap-south-1',
@@ -20,35 +28,35 @@ const s3Client = new S3Client({
 // with exec we can run any code or execute any command, here we have code in ouput directory
 async function init() {
     console.log('Executing script.js file')
-    // publishLog('Build Started...')
+    publishLog('Build Started...')
     const outDirPath = path.join(__dirname, 'output')
 
     const p = exec(`cd ${outDirPath} && npm install && npm run build`)
 
     p.stdout.on('data', function (data) {
         console.log(data.toString())
-        // publishLog(data.toString())
+        publishLog(data.toString())
     })
 
     p.stdout.on('error', function (data) {
         console.log('Error', data.toString())
-        // publishLog(`error: ${data.toString()}`)
+        publishLog(`error: ${data.toString()}`)
     })
 
     p.on('close', async function () {
         console.log('Build Complete')
-        // publishLog(`Build Complete`)
+        publishLog(`Build Complete`)
         const distFolderPath = path.join(__dirname, 'output', 'dist')
         const distFolderContents = fs.readdirSync(distFolderPath, { recursive: true })
 
-        // publishLog(`Starting to upload`)
+        publishLog(`Starting to upload`)
         for (const file of distFolderContents) {
             const filePath = path.join(distFolderPath, file)
             // if the filepath have directory then continue as we want static file like index.html, styles.css etc
             if (fs.lstatSync(filePath).isDirectory()) continue;
 
             console.log('uploading', filePath)
-            // publishLog(`uploading ${file}`)
+            publishLog(`uploading ${file}`)
             
 
             const command = new PutObjectCommand({
@@ -61,10 +69,10 @@ async function init() {
             
             // .send will upload this command in S3bucket
             await s3Client.send(command)
-            // publishLog(`uploaded ${file}`)
+            publishLog(`uploaded ${file}`)
             console.log('uploaded', filePath)
         }
-        // publishLog(`Done`)
+        publishLog(`Done`)
         console.log('Done...')
     })
 }
