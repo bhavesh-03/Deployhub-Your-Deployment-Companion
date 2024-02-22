@@ -5,6 +5,11 @@ const { Server } = require('socket.io')
 const Redis = require('ioredis')
 const app = express()
 const PORT = 9000
+var cors = require('cors')
+
+
+
+app.use(cors())
 
 
 const subscriber = new Redis('rediss://default:AVNS_Yx79L4motetKBPqAonM@redis-c1d0a88-vercel-bhavesh.a.aivencloud.com:17284')
