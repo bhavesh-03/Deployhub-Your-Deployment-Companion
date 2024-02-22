@@ -5,6 +5,8 @@ import Button from "../components/Button";
 import apiService from "../service/apiService";
 import { io } from "socket.io-client";
 
+
+
 const SubmissionPage = () => {
   const [repoLink, setRepoLink] = useState("");
   const [slug, setSlug] = useState("");
@@ -27,7 +29,7 @@ const SubmissionPage = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "Submit Your Repo - Vercel Clone";
+    document.title = "Deployhub";
   }, []);
 
   const handleChange = (event) => {
@@ -82,6 +84,7 @@ const SubmissionPage = () => {
     };
   }, [handleSocketIncommingMessage]);
 
+  
   const handleReset = () => {
     setRepoLink("");
     setSlug("");
@@ -99,6 +102,9 @@ const SubmissionPage = () => {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background-size: cover;
+
+      background-position: center;
       .submit-view,
       .log-view {
         display: flex;
@@ -125,11 +131,7 @@ const SubmissionPage = () => {
       }
       .log-container {
         min-height: 200px;
-        width: fit-content;
         max-height: 400px;
-        @media (max-width: 768px) {
-          max-height: 300px;
-        }
         width: calc(100vw - 40px);
         background: #000;
         color: #fff;
@@ -142,15 +144,13 @@ const SubmissionPage = () => {
         flex-direction: column;
         text-align: left;
       }
-      .label{
-        font-weight: bold;
-        font-size : 50px ;
-        margin-bottom: 1px; 
+      .label {
+        margin-bottom: 1px;
+        align-items:center; 
       }
-      .label-text{
-        font-weight:semibold;
-        font-size:25px ;
+      .label-text {
         margin-top: 0;
+        align-items : center
       }
       .new-submission {
         display: flex;
@@ -161,6 +161,15 @@ const SubmissionPage = () => {
       .url {
         text-align: center;
       }
+      svg {
+        max-width: 100vw;
+        margin-bottom: 0px;
+        z-index: -1;
+        position: absolute;
+        bottom: 0; /* Position at the bottom of the screen */
+        left: 0; /* Ensure it's aligned to the left */
+        width: 100%; /* Full width */ 
+      }
     `,
     []
   );
@@ -169,8 +178,8 @@ const SubmissionPage = () => {
     <Styled>
       {!activeSlug ? (
         <div className="submit-view">
-          <h1>Your Code Launchpad</h1>
-          <h3 >Connect your GitHub repo to deploy</h3>
+          <h1 className="label">Your Code Launchpad</h1>
+          <h3 className="label-text">Connect your GitHub repo to deploy</h3>
           <div>
             <Input
               type="text"
@@ -180,6 +189,7 @@ const SubmissionPage = () => {
             />
             {error && <div className="error-text">{error}</div>}
           </div>
+          
           <Input
             type="text"
             value={slug}
@@ -223,7 +233,10 @@ const SubmissionPage = () => {
           <Button text={"New Submission"} onClick={handleReset} />
         </div>
       )}
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="11000" d="M0,128L48,112C96,96,192,64,288,85.3C384,107,480,181,576,181.3C672,181,768,107,864,64C960,21,1056,11,1152,21.3C1248,32,1344,64,1392,80L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
     </Styled>
+    
+    
   );
 };
 

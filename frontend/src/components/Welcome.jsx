@@ -16,12 +16,25 @@ function Welcome() {
       
       font-size: 2.5em;
     }
-    .highlighted {
-      font-weight: bold;
-      font-style: italic;
-      :hover {
-      color: #646cff;
-    }
+.highlighted {
+  font-weight: bold;
+  font-style: italic;
+  color: white; /* Initial color */
+  animation: color-blink 2s infinite alternate; /* Color blinking animation */
+}
+
+@keyframes color-blink {
+  0% {
+    color: white; /* Initial color */
+  }
+  50% {
+    color: #646cff; /* Blue color */
+  }
+  100% {
+    color: white; /* Back to white color */
+  }
+}
+
     }
     .welcome-text {
       color: #666;
