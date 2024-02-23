@@ -28,7 +28,8 @@ At this point following services would be up and running:
 
 ### Demo
 
-https://imgur.com/a/4qWIp1z
+[Watch The Demo Video](https://imgur.com/a/4qWIp1z)
+
 ## System Architecture
 
 ![Vercel Clone Architecture](https://imgur.com/a/wehBvFl)
