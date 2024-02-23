@@ -5,6 +5,17 @@ import Button from "../components/Button";
 import apiService from "../service/apiService";
 import { io } from "socket.io-client";
 
+  // 1. We are subscribing to the logs of the project
+  // 2. We are getting the logs from the server and updating the logs state
+  // 3. We are setting the title of the document to Deployhub
+  // 4. We are setting the state of the logs
+  // 5. We are setting the state of the url
+  // 6. We are setting the state of the activeSlug
+  // 7. We are setting the state of the loading
+  // 8. We are setting the state of the error
+  // 9. We are setting the state of the slug
+  // 10. We are setting the state of the repoLink
+
 
 
 const SubmissionPage = () => {
@@ -17,6 +28,9 @@ const SubmissionPage = () => {
   const [logs, setLogs] = useState([]);
 
   const logContainerRef = useRef(null);
+
+
+
 
   const handleSocketIncommingMessage = useCallback((message) => {
     if (typeof message === "string") {
