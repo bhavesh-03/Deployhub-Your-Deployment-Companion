@@ -31,5 +31,5 @@ At this point following services would be up and running:
 https://imgur.com/a/4qWIp1z
 ## System Architecture
 
-![System Architecture](https://imgur.com/a/wehBvFl)
+![Vercel Clone Architecture](https://i.imgur.com/r7QUXqZ.png)
 
