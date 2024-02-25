@@ -12,7 +12,7 @@ var cors = require('cors')
 app.use(cors())
 
 
-const subscriber = new Redis('rediss://default:AVNS_Yx79L4motetKBPqAonM@redis-c1d0a88-vercel-bhavesh.a.aivencloud.com:17284')
+const subscriber = new Redis('')
 app.use(express.json()) ;
 
 
@@ -30,15 +30,15 @@ io.listen(9002, () => console.log('Socket Server 9002'))
 const ecsClient = new ECSClient({
     region: 'ap-south-1',
     credentials: {
-        accessKeyId: 'AKIAYS2NSUVF364SQYP3',
-        secretAccessKey: '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'
+        accessKeyId: '',
+        secretAccessKey: ''
     }
 })
 
 
 const config = {
-    CLUSTER: 'arn:aws:ecs:ap-south-1:590183834955:cluster/builder-cluster-bhavesh',
-    TASK: 'arn:aws:ecs:ap-south-1:590183834955:task-definition/builder-task-vercel'
+    CLUSTER: '',
+    TASK: ''
 }
 
 
@@ -57,8 +57,8 @@ app.post('/project', async (req, res) => {
         networkConfiguration: {
             awsvpcConfiguration: {
                 assignPublicIp: 'ENABLED',
-                subnets: ['subnet-033d07782dd0ccd35', 'subnet-05e134043c6d6d40c', 'subnet-05378435a07f0bc85'],
-                securityGroups: ['sg-031e9aa1cba4b31c1']
+                subnets: ['', '', ''],
+                securityGroups: ['']
             }
         },
         overrides: {
