@@ -9,7 +9,7 @@ const mime = require('mime-types')
 const PROJECT_ID = process.env.PROJECT_ID ; // this is the project id which we will get from the environment variable
 
 const Redis = require('ioredis')
-const publisher = new Redis('rediss://default:AVNS_Yx79L4motetKBPqAonM@redis-c1d0a88-vercel-bhavesh.a.aivencloud.com:17284')
+const publisher = new Redis('')
 
 
 function publishLog(log) {
@@ -20,8 +20,8 @@ function publishLog(log) {
 const s3Client = new S3Client({
     region: 'ap-south-1',
     credentials: {
-        accessKeyId: 'AKIAYS2NSUVF364SQYP3',
-        secretAccessKey: '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'
+        accessKeyId: '',
+        secretAccessKey: ''
     }
 })
 
