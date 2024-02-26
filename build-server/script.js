@@ -12,8 +12,8 @@ const PROJECT_ID = process.env.PROJECT_ID ; // this is the project id which we w
 const s3Client = new S3Client({
     region: 'ap-south-1',
     credentials: {
-        accessKeyId: 'AKIAYS2NSUVF364SQYP3',
-        secretAccessKey: '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'
+        accessKeyId: '',
+        secretAccessKey: ''
     }
 })
 
